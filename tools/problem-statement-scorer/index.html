@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problem Statement Scorer | StratSchool Tools</title>
+  <meta name="description" content="Use the StratSchool Problem Statement Scorer to evaluate startup ideas across urgency, frequency, pain, reach, and willingness to pay.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css">
+</head>
+<body>
+  <div class="site-shell article-page">
+    <nav class="site-nav" data-nav><div class="container nav-inner"><a class="nav-brand" href="/"><img src="/logo.png" alt="StratSchool"></a><div class="nav-links"><a href="/">Home</a><a href="/bootcamp/">For Founders</a><a href="/institutions/">For Institutions</a><a href="/edii-tn-ai/">For Governments</a><a href="/resources/" aria-current="page">Resources</a><a class="btn btn-primary" href="/bootcamp/">Join Next Cohort</a></div><button class="menu-toggle" data-menu-toggle aria-label="Open menu" aria-expanded="false"><span></span></button></div></nav>
+    <div class="mobile-menu" data-mobile-menu><div class="container"><a href="/">Home</a><a href="/bootcamp/">For Founders</a><a href="/institutions/">For Institutions</a><a href="/edii-tn-ai/">For Governments</a><a href="/resources/">Resources</a><a href="/about/">About</a></div></div>
+    <main>
+      <section class="section dark-section page-hero"><div class="container section-inner"><div class="article-meta reveal"><span class="article-tag">Tool 01</span><span>Validation</span></div><h1 class="hero-title compact reveal" style="--delay:80ms;">Problem statement scorer.</h1><p class="lede reveal" style="--delay:160ms;">Use this before building. It helps founders test whether the problem is painful and urgent enough to deserve real execution.</p></div></section>
+      <section class="section light-section"><div class="container section-inner tool-layout">
+        <div class="tool-main">
+          <div class="tool-panel reveal" data-tool="problem-score">
+            <div><div class="kicker">Founder validation tool</div><h2 class="section-title wide">Score the problem before you scope the product.</h2><p class="body-copy">Rate the problem on five inputs. The score is weighted to favor urgency and pain slightly more than raw reach.</p></div>
+            <div class="metric-grid"><div class="metric-card"><strong>Urgency</strong><span>Does the user need this solved now?</span></div><div class="metric-card"><strong>Pain</strong><span>How costly or frustrating is the problem?</span></div><div class="metric-card"><strong>Reach</strong><span>Can you identify and reach the audience clearly?</span></div></div>
+            <form class="tool-form two-col">
+              <label class="field-copy"><span>Urgency / 5</span><input type="number" name="urgency" min="1" max="5" value="4"></label>
+              <label class="field-copy"><span>Frequency / 5</span><input type="number" name="frequency" min="1" max="5" value="4"></label>
+              <label class="field-copy"><span>Pain / 5</span><input type="number" name="pain" min="1" max="5" value="5"></label>
+              <label class="field-copy"><span>Reach / 5</span><input type="number" name="reach" min="1" max="5" value="3"></label>
+              <label class="field-copy full"><span>Willingness to pay / 5</span><input type="number" name="willingness" min="1" max="5" value="4"></label>
+              <div class="tool-toolbar full"><button class="btn btn-primary" type="submit">Score problem</button></div>
+            </form>
+            <div class="tool-output" data-tool-output>Enter the scores and generate a founder-grade readout.</div>
+          </div>
+        </div>
+        <aside class="article-aside">
+          <div class="card reveal"><div class="kicker">How to use it</div><div class="tool-steps"><div class="tool-step"><strong>Step 1</strong><span>Score honestly, not optimistically.</span></div><div class="tool-step"><strong>Step 2</strong><span>If the score is weak, rework the audience or problem before building.</span></div><div class="tool-step"><strong>Step 3</strong><span>Use the interview builder next if the score looks promising.</span></div></div></div>
+          <div class="card reveal" style="--delay:80ms;"><div class="kicker">Next tool</div><h3 class="card-title">Customer interview builder</h3><p class="body-copy">Turn the problem into actual research conversations.</p><a class="btn btn-secondary" href="/tools/customer-interview-builder/">Open next tool</a></div>
+        </aside>
+      </div></section>
+    </main>
+  </div>
+  <script src="/site.js"></script>
+</body>
+</html>
