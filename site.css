@@ -1217,6 +1217,52 @@ textarea:focus {
 
 .brand-section .logo-track {
   animation-duration: 30s;
+  gap: 80px;
+  align-items: center;
+}
+
+/* Strategic partnerships: card-less rail, uniform monochrome logos */
+.brand-section .logo-rail {
+  gap: 80px;
+  padding: 8px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.brand-section .logo-rail .logo-pill {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  min-width: 0;
+  height: 100px;
+}
+
+/* simple wordmarks: balanced by a shared cap height */
+.brand-section .logo-rail .logo-pill img {
+  max-height: 60px;
+  max-width: 300px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  mix-blend-mode: normal;
+  opacity: 0.82;
+  transition: opacity 0.25s ease;
+}
+
+.brand-section .logo-rail .logo-pill:hover img {
+  opacity: 1;
+}
+
+/* stacked logos (icon + multi-line text) need more height to stay legible */
+.brand-section .logo-rail .logo-pill.logo-edii img {
+  max-height: 84px;
+  max-width: 400px;
+}
+
+.brand-section .logo-rail .logo-pill.logo-sih img {
+  max-height: 88px;
+  max-width: 240px;
 }
 
 .tech-intro {
