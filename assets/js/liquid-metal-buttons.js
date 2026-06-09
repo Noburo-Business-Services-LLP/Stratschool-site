@@ -82,6 +82,9 @@ import { liquidMetalFragmentShader } from "/assets/vendor/paper-shaders/shaders/
     var hit = document.createElement("a");
     hit.href = href;
     hit.setAttribute("aria-label", label);
+    if (anchor.hasAttribute("download")) hit.setAttribute("download", anchor.getAttribute("download") || "");
+    if (anchor.hasAttribute("target")) hit.setAttribute("target", anchor.getAttribute("target"));
+    if (anchor.hasAttribute("rel")) hit.setAttribute("rel", anchor.getAttribute("rel"));
     hit.style.cssText =
       "position:absolute;top:0;left:0;width:" + width + "px;height:" + height +
       "px;background:transparent;border:none;cursor:pointer;z-index:40;transform-style:preserve-3d;transform:translateZ(25px);overflow:hidden;border-radius:100px;display:block;";
