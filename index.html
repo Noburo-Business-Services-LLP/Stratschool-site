@@ -21,7 +21,7 @@
           <a href="/institutions/">For Institutions</a>
           <a href="/edii-tn-ai/">For Governments</a>
           <a href="/resources/">Resources</a>
-          <a class="btn btn-primary" href="/bootcamp/">Join Next Cohort</a>
+          <a class="btn btn-primary liquid-glass" href="/bootcamp/">Join Next Cohort</a>
         </div>
         <button class="menu-toggle" data-menu-toggle aria-label="Open menu" aria-expanded="false"><span></span></button>
       </div>
@@ -46,8 +46,8 @@
             <h1 class="hero-title reveal" style="--delay: 80ms;">Build a startup. Not a slide deck.</h1>
             <p class="lede hero-lead reveal" style="--delay: 160ms;">StratSchool helps first-time founders move from idea to startup with sharper structure, clearer decisions, and practical systems that hold up after the workshop ends.</p>
             <div class="actions reveal" style="--delay: 240ms;">
-              <a class="btn btn-primary" href="/bootcamp/">Join Ignite</a>
-              <a class="btn btn-secondary" href="/institutions/">See How It Works</a>
+              <a class="btn btn-primary liquid-glass" href="/bootcamp/">Join Ignite</a>
+              <a class="btn btn-secondary liquid-glass" href="/institutions/">See How It Works</a>
             </div>
             <div class="hero-proof reveal" style="--delay: 300ms;">
               <span>Built for first-time founders</span>
@@ -56,7 +56,7 @@
             </div>
             <div class="stats-grid hero-stats" style="margin-top: 34px;">
               <div class="stat-block reveal" style="--delay: 320ms;">
-                <strong class="stat-number" data-counter data-target="1000" data-suffix="+">0+</strong>
+                <strong class="stat-number" data-counter data-target="15000" data-suffix="+">0+</strong>
                 <span>Founders benefitted</span>
               </div>
               <div class="stat-block reveal" style="--delay: 400ms;">
@@ -64,7 +64,7 @@
                 <span>Institutions engaged</span>
               </div>
               <div class="stat-block reveal" style="--delay: 480ms;">
-                <strong class="stat-number" data-counter data-target="250" data-suffix="+">0+</strong>
+                <strong class="stat-number" data-counter data-target="500" data-suffix="+">0+</strong>
                 <span>MVPs built</span>
               </div>
             </div>
@@ -222,7 +222,9 @@
               <span class="pill reveal">Ecosystem partnerships: StartupTN, EDII-TN, Afthonia, iTNT</span>
               <span class="pill reveal" style="--delay: 60ms;">Programs designed for founder, campus, and public-sector outcomes</span>
             </div>
-            <div>
+            <div class="tech-paths-wrap">
+              <div class="tech-paths-bg" data-paths aria-hidden="true"></div>
+              <div class="tech-paths-content">
               <div class="eyebrow reveal">Technology partnerships</div>
               <div class="tech-intro reveal">
                 <h3 class="tech-heading">The execution stack behind delivery.</h3>
@@ -231,22 +233,21 @@
               <div class="tech-grid">
                 <article class="tech-card tech-card-dark reveal">
                   <div class="tech-card-kicker">Execution layer</div>
-                  <div class="tech-card-logo-wrap tech-card-logo-wrap-dark">
-                    <img class="tech-card-logo tech-card-logo-nebulaa" src="/assets/logos/nebulaa.png" alt="Nebulaa" loading="lazy">
+                  <div class="tech-card-logo-wrap">
+                    <img class="tech-card-logo tech-card-logo-nebulaa" src="/assets/logos/nebulaa-new.png" alt="Nebulaa" loading="lazy">
                   </div>
-                  <h3 class="tech-card-title">Nebulaa</h3>
                   <p class="tech-card-copy">Nebulaa speeds up founder execution with practical marketing, outreach, and operating support instead of adding tool clutter.</p>
                   <div class="tech-card-note">Built for post-workshop execution, founder momentum, and faster follow-through.</div>
                 </article>
                 <article class="tech-card tech-card-light reveal" style="--delay: 70ms;">
                   <div class="tech-card-kicker">Build systems</div>
-                  <div class="tech-card-logo-wrap tech-card-logo-wrap-light">
-                    <img class="tech-card-logo tech-card-logo-pragmr" src="/assets/logos/pragmr.png" alt="Pragmr" loading="lazy">
+                  <div class="tech-card-logo-wrap">
+                    <img class="tech-card-logo tech-card-logo-pragmr" src="/assets/logos/pragmr-new.png" alt="Pragmr" loading="lazy">
                   </div>
-                  <h3 class="tech-card-title">Pragmr</h3>
                   <p class="tech-card-copy">Pragmr strengthens delivery with product, automation, and implementation systems that help programs move from sessions to outcomes.</p>
                   <div class="tech-card-note">Supports system design, automation architecture, and scalable program infrastructure.</div>
                 </article>
+              </div>
               </div>
             </div>
           </div>
@@ -362,6 +363,53 @@
       </section>
     </main>
   </div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="liquid-glass" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.012" numOctaves="1" seed="2" result="noise"/>
+        <feGaussianBlur in="noise" stdDeviation="1.5" result="blur"/>
+        <feDisplacementMap in="SourceGraphic" in2="blur" scale="16" xChannelSelector="R" yChannelSelector="B"/>
+      </filter>
+    </defs>
+  </svg>
   <script src="/site.js"></script>
+  <script>
+    // Animated flowing background paths (adapted from Aceternity BackgroundPaths), yellow + white
+    (function(){
+      var host = document.querySelector('[data-paths]');
+      if(!host) return;
+      var NS = 'http://www.w3.org/2000/svg';
+      function buildSvg(position, color){
+        var svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('viewBox', '0 0 696 316');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('preserveAspectRatio', 'none');
+        for(var i=0;i<36;i++){
+          var d = 'M-'+(380-i*5*position)+' -'+(189+i*6)
+                + 'C-'+(380-i*5*position)+' -'+(189+i*6)
+                + ' -'+(312-i*5*position)+' '+(216-i*6)
+                + ' '+(152-i*5*position)+' '+(343-i*6)
+                + 'C'+(616-i*5*position)+' '+(470-i*6)
+                + ' '+(684-i*5*position)+' '+(875-i*6)
+                + ' '+(684-i*5*position)+' '+(875-i*6);
+          var p = document.createElementNS(NS, 'path');
+          p.setAttribute('d', d);
+          p.setAttribute('stroke', color);
+          p.setAttribute('stroke-width', (0.5 + i*0.05).toFixed(2));
+          p.setAttribute('pathLength', '1');
+          p.setAttribute('fill', 'none');
+          p.setAttribute('stroke-dasharray', '0.35 0.65');
+          p.style.strokeOpacity = (0.05 + i*0.012).toFixed(3);
+          var dur = (20 + Math.random()*10).toFixed(1);
+          var delay = (-Math.random()*30).toFixed(1);
+          p.style.animation = 'pathflow ' + dur + 's linear ' + delay + 's infinite';
+          svg.appendChild(p);
+        }
+        return svg;
+      }
+      host.appendChild(buildSvg(1, '#F5C518'));   // Nebulaa yellow
+      host.appendChild(buildSvg(-1, '#FFFFFF'));  // Pragmr white
+    })();
+  </script>
 </body>
 </html>

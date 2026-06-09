@@ -1322,21 +1322,19 @@ textarea:focus {
 }
 
 .tech-card-logo-wrap {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  width: fit-content;
-  min-width: 160px;
-  min-height: 84px;
-  padding: 16px 20px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 104px;
+  padding: 0;
+  background: transparent;
+  border: none;
 }
 
 .tech-card-logo-wrap-light {
-  background: rgba(255,255,255,0.96);
-  border-color: rgba(255,255,255,0.18);
+  background: transparent;
+  border: none;
 }
 
 .tech-card-logo {
@@ -1347,12 +1345,101 @@ textarea:focus {
 }
 
 .tech-card-logo-nebulaa {
-  max-height: 62px;
+  max-height: 140px;
+  max-width: 260px;
   filter: none;
 }
 
 .tech-card-logo-pragmr {
-  max-height: 44px;
+  max-height: 56px;
+}
+
+/* Animated flowing background paths (yellow + white) behind tech partnerships */
+.tech-paths-wrap {
+  position: relative;
+}
+
+.tech-paths-bg {
+  position: absolute;
+  inset: -40px -16px;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.tech-paths-bg svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tech-paths-bg path {
+  fill: none;
+}
+
+.tech-paths-content {
+  position: relative;
+  z-index: 1;
+}
+
+.tech-paths-wrap .tech-card {
+  background: rgba(16, 14, 16, 0.6);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+@keyframes pathflow {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -1; }
+}
+
+/* Liquid-glass treatment for CTA buttons (keeps existing colours) */
+.liquid-glass {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, filter 0.3s ease;
+  box-shadow:
+    inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.5),
+    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.4),
+    inset 0 0 6px 4px rgba(255, 255, 255, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.28),
+    0 0 12px rgba(255, 255, 255, 0.08);
+}
+
+.liquid-glass:hover {
+  transform: scale(1.05);
+  filter: brightness(1.06);
+}
+
+.liquid-glass:active {
+  transform: scale(0.98);
+}
+
+/* SVG refraction layer — visible through translucent/outline buttons */
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: -1;
+  -webkit-backdrop-filter: url("#liquid-glass");
+  backdrop-filter: url("#liquid-glass");
+}
+
+/* glass sheen on top */
+.liquid-glass::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 46%;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+  pointer-events: none;
 }
 
 .tech-card-copy {
