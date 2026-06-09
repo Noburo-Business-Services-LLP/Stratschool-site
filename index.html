@@ -271,6 +271,10 @@
             .pc-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2;}
             .pc-dot{width:9px;height:9px;border-radius:50%;border:none;background:rgba(255,255,255,.5);cursor:pointer;padding:0;transition:all .25s;}
             .pc-dot.active{background:#fff;width:24px;border-radius:6px;}
+            .inst-rail{gap:0;margin-top:30px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);}
+            .inst-rail .logo-track{gap:0;align-items:center;animation-duration:36s;min-width:max-content;}
+            .inst-rail .logo-pill{background:transparent;border:0;box-shadow:none;padding:0;margin-right:72px;min-width:0;height:80px;border-radius:0;}
+            .inst-rail .logo-pill img{max-height:68px;max-width:200px;width:auto;object-fit:contain;filter:none;}
           </style>
           <div class="scroll-tilt">
           <div class="photo-carousel" data-carousel>
@@ -284,13 +288,21 @@
             <div class="pc-dots" data-pc-dots></div>
           </div>
           </div>
-          <div class="institution-logo-grid">
-            <span class="logo-pill logo-large reveal"><img src="/assets/logos/srm.png" alt="SRM University" loading="lazy"></span>
-            <span class="logo-pill logo-large reveal" style="--delay: 40ms;"><img src="/assets/logos/sairam.png" alt="Sairam Institutions" loading="lazy"></span>
-            <span class="logo-pill logo-large reveal" style="--delay: 80ms;"><img src="/assets/logos/mop.png" alt="M.O.P. Vaishnav College for Women" loading="lazy"></span>
-            <span class="logo-pill logo-large reveal" style="--delay: 120ms;"><img src="/assets/logos/hindustan.png" alt="Hindustan College of Arts and Science" loading="lazy"></span>
-            <span class="logo-pill logo-large reveal" style="--delay: 160ms;"><img src="/assets/logos/stjoseph.png" alt="St. Joseph's College of Engineering" loading="lazy"></span>
-            <span class="logo-pill logo-large reveal" style="--delay: 200ms;"><img src="/assets/logos/amcet.png" alt="AMCET Institutions" loading="lazy"></span>
+          <div class="logo-rail inst-rail">
+            <div class="logo-track">
+              <span class="logo-pill"><img src="/assets/logos/srm.png" alt="SRM University" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/sairam.png" alt="Sairam Institutions" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/mop.png" alt="M.O.P. Vaishnav College for Women" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/hindustan.png" alt="Hindustan College of Arts and Science" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/stjoseph.png" alt="St. Joseph's College of Engineering" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/amcet.png" alt="AMCET Institutions" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/srm.png" alt="" aria-hidden="true" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/sairam.png" alt="" aria-hidden="true" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/mop.png" alt="" aria-hidden="true" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/hindustan.png" alt="" aria-hidden="true" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/stjoseph.png" alt="" aria-hidden="true" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/amcet.png" alt="" aria-hidden="true" loading="lazy"></span>
+            </div>
           </div>
         </div>
       </section>
