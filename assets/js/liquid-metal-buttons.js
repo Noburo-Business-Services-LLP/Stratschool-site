@@ -29,6 +29,7 @@ import { liquidMetalFragmentShader } from "/assets/vendor/paper-shaders/shaders/
   function build(anchor) {
     var label = anchor.textContent.trim();
     var href = anchor.getAttribute("href") || "#";
+    var isRed = anchor.getAttribute("data-metal") === "red";
     var width = Math.round(measureText(label) + 56);
     var height = 46;
     var innerW = width - 4,
@@ -49,7 +50,7 @@ import { liquidMetalFragmentShader } from "/assets/vendor/paper-shaders/shaders/
     var span = document.createElement("span");
     span.textContent = label;
     span.style.cssText =
-      "font-size:14px;color:#d2d2d2;font-weight:600;letter-spacing:0.01em;text-shadow:0px 1px 2px rgba(0,0,0,0.6);white-space:nowrap;";
+      "font-size:14px;color:" + (isRed ? "#ffffff" : "#d2d2d2") + ";font-weight:600;letter-spacing:0.01em;text-shadow:0px 1px 2px rgba(0,0,0,0.6);white-space:nowrap;";
     textLayer.appendChild(span);
 
     var innerLayer = document.createElement("div");
@@ -59,7 +60,8 @@ import { liquidMetalFragmentShader } from "/assets/vendor/paper-shaders/shaders/
     var innerPill = document.createElement("div");
     innerPill.style.cssText =
       "width:" + innerW + "px;height:" + innerH +
-      "px;margin:2px;border-radius:100px;background:linear-gradient(180deg,#202020 0%,#000 100%);";
+      "px;margin:2px;border-radius:100px;background:" +
+      (isRed ? "linear-gradient(180deg,#ef4650 0%,#c01f27 100%)" : "linear-gradient(180deg,#202020 0%,#000 100%)") + ";";
     innerLayer.appendChild(innerPill);
 
     var shaderLayer = document.createElement("div");
