@@ -1523,7 +1523,8 @@ textarea:focus {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.consult-field input {
+.consult-field input,
+.consult-field textarea {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
@@ -1534,7 +1535,13 @@ textarea:focus {
   transition: border-color 0.2s ease;
 }
 
-.consult-field input:focus {
+.consult-field textarea {
+  resize: vertical;
+  min-height: 76px;
+}
+
+.consult-field input:focus,
+.consult-field textarea:focus {
   outline: none;
   border-color: var(--red);
 }

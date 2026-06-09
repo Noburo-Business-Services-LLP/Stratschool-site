@@ -275,6 +275,7 @@
         <div class="consult-field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>
         <div class="consult-field"><label for="cf-college">College / Institution</label><input id="cf-college" name="college" type="text" required></div>
         <div class="consult-field"><label for="cf-mobile">Mobile number</label><input id="cf-mobile" name="mobile" type="tel" inputmode="tel" required></div>
+        <div class="consult-field"><label for="cf-req">Requirement</label><textarea id="cf-req" name="requirement" rows="3" placeholder="Tell us what you're looking for" required></textarea></div>
         <button type="submit" class="btn btn-primary consult-submit">Submit request</button>
         <p class="consult-status" data-consult-status role="status" aria-live="polite"></p>
       </form>
@@ -301,11 +302,12 @@
           name: form.name.value.trim(),
           email: form.email.value.trim(),
           college: form.college.value.trim(),
-          mobile: form.mobile.value.trim()
+          mobile: form.mobile.value.trim(),
+          requirement: form.requirement.value.trim()
         };
-        if(!data.name || !data.email || !data.college || !data.mobile){ setStatus('Please fill in all fields.', 'err'); return; }
+        if(!data.name || !data.email || !data.college || !data.mobile || !data.requirement){ setStatus('Please fill in all fields.', 'err'); return; }
         if(!ACCESS_KEY || ACCESS_KEY === 'YOUR_WEB3FORMS_ACCESS_KEY'){
-          var body = 'Name: ' + data.name + '\nEmail: ' + data.email + '\nCollege: ' + data.college + '\nMobile: ' + data.mobile;
+          var body = 'Name: ' + data.name + '\nEmail: ' + data.email + '\nCollege: ' + data.college + '\nMobile: ' + data.mobile + '\nRequirement: ' + data.requirement;
           window.location.href = 'mailto:reach@stratschool.org?subject=' + encodeURIComponent('Institution Consultation Request') + '&body=' + encodeURIComponent(body);
           setStatus('Opening your email app to send the request…', 'ok');
           return;
@@ -318,7 +320,7 @@
             access_key: ACCESS_KEY,
             subject: 'New Institution Consultation Request',
             from_name: 'StratSchool Website',
-            name: data.name, email: data.email, college: data.college, mobile: data.mobile
+            name: data.name, email: data.email, college: data.college, mobile: data.mobile, requirement: data.requirement
           })
         }).then(function(r){ return r.json(); }).then(function(res){
           if(res.success){ setStatus("Thanks! We'll reach out to you soon.", 'ok'); form.reset(); setTimeout(close, 1800); }
