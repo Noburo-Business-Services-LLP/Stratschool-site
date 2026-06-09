@@ -21,7 +21,7 @@
           <a href="/institutions/" aria-current="page">For Institutions</a>
           <a href="/edii-tn-ai/">For Governments</a>
           <a href="/resources/">Resources</a>
-          <a class="btn btn-primary" href="mailto:hello@stratschool.org?subject=Institution%20Consultation">Schedule Consultation</a>
+          <a class="btn btn-primary" href="#" data-consult-open>Schedule Consultation</a>
         </div>
         <button class="menu-toggle" data-menu-toggle aria-label="Open menu" aria-expanded="false"><span></span></button>
       </div>
@@ -46,7 +46,7 @@
             <h1 class="hero-title compact reveal" style="--delay: 80ms;">Embed startup infrastructure on campus.</h1>
             <p class="lede reveal" style="--delay: 160ms;">StratSchool works with institutions that want sharper innovation outcomes, stronger student execution, and entrepreneurship programs that feel practical instead of ceremonial.</p>
             <div class="actions reveal" style="--delay: 240ms;">
-              <a class="btn btn-primary" href="mailto:hello@stratschool.org?subject=Institution%20Consultation">Schedule Consultation</a>
+              <a class="btn btn-primary" href="#" data-consult-open>Schedule Consultation</a>
               <a class="btn btn-secondary" href="/edii-tn-ai/">View EDII-TN case</a>
             </div>
             <div class="pill-list reveal" style="--delay: 300ms;">
@@ -263,6 +263,69 @@
       </section>
     </main>
   </div>
+  <div class="consult-modal" data-consult-modal hidden>
+    <div class="consult-overlay" data-consult-close></div>
+    <div class="consult-dialog" role="dialog" aria-modal="true" aria-labelledby="consult-title">
+      <button type="button" class="consult-x" data-consult-close aria-label="Close">&times;</button>
+      <div class="eyebrow" style="color: var(--red);">For Institutions</div>
+      <h3 id="consult-title" class="consult-title">Schedule a consultation</h3>
+      <p class="consult-sub">Share a few details and our team will reach out to you.</p>
+      <form class="consult-form" data-consult-form novalidate>
+        <div class="consult-field"><label for="cf-name">Name</label><input id="cf-name" name="name" type="text" autocomplete="name" required></div>
+        <div class="consult-field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="consult-field"><label for="cf-college">College / Institution</label><input id="cf-college" name="college" type="text" required></div>
+        <div class="consult-field"><label for="cf-mobile">Mobile number</label><input id="cf-mobile" name="mobile" type="tel" inputmode="tel" required></div>
+        <button type="submit" class="btn btn-primary consult-submit">Submit request</button>
+        <p class="consult-status" data-consult-status role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
   <script src="/site.js"></script>
+  <script>
+    // Consultation form: emails details to reach@stratschool.org via Web3Forms (with mailto fallback)
+    (function(){
+      var ACCESS_KEY = "5ffbde2c-509b-4ce0-949b-d1bafee7675a"; // Web3Forms -> delivers to reach@stratschool.org
+      var modal = document.querySelector('[data-consult-modal]');
+      if(!modal) return;
+      var form = modal.querySelector('[data-consult-form]');
+      var statusEl = modal.querySelector('[data-consult-status]');
+      function setStatus(msg, cls){ statusEl.textContent = msg; statusEl.className = 'consult-status' + (cls ? ' ' + cls : ''); }
+      function open(e){ if(e) e.preventDefault(); modal.hidden = false; document.body.classList.add('consult-open'); setStatus('',''); var f = modal.querySelector('input'); if(f) setTimeout(function(){ f.focus(); }, 50); }
+      function close(){ modal.hidden = true; document.body.classList.remove('consult-open'); }
+      document.querySelectorAll('[data-consult-open]').forEach(function(b){ b.addEventListener('click', open); });
+      modal.querySelectorAll('[data-consult-close]').forEach(function(b){ b.addEventListener('click', close); });
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !modal.hidden) close(); });
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var data = {
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          college: form.college.value.trim(),
+          mobile: form.mobile.value.trim()
+        };
+        if(!data.name || !data.email || !data.college || !data.mobile){ setStatus('Please fill in all fields.', 'err'); return; }
+        if(!ACCESS_KEY || ACCESS_KEY === 'YOUR_WEB3FORMS_ACCESS_KEY'){
+          var body = 'Name: ' + data.name + '\nEmail: ' + data.email + '\nCollege: ' + data.college + '\nMobile: ' + data.mobile;
+          window.location.href = 'mailto:reach@stratschool.org?subject=' + encodeURIComponent('Institution Consultation Request') + '&body=' + encodeURIComponent(body);
+          setStatus('Opening your email app to send the request…', 'ok');
+          return;
+        }
+        setStatus('Sending…', '');
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: ACCESS_KEY,
+            subject: 'New Institution Consultation Request',
+            from_name: 'StratSchool Website',
+            name: data.name, email: data.email, college: data.college, mobile: data.mobile
+          })
+        }).then(function(r){ return r.json(); }).then(function(res){
+          if(res.success){ setStatus("Thanks! We'll reach out to you soon.", 'ok'); form.reset(); setTimeout(close, 1800); }
+          else { setStatus('Something went wrong. Please email reach@stratschool.org.', 'err'); }
+        }).catch(function(){ setStatus('Network error. Please email reach@stratschool.org.', 'err'); });
+      });
+    })();
+  </script>
 </body>
 </html>

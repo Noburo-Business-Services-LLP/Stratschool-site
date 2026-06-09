@@ -1442,6 +1442,120 @@ textarea:focus {
   pointer-events: none;
 }
 
+/* Consultation form modal */
+.consult-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.consult-modal[hidden] { display: none; }
+
+.consult-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.consult-dialog {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  background: #141214;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  animation: consultIn 0.25s ease;
+}
+
+@keyframes consultIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+.consult-x {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.9rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.consult-x:hover { color: #fff; }
+
+.consult-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  margin: 6px 0;
+}
+
+.consult-sub {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.consult-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.consult-field label {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.consult-field input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: #fff;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.consult-field input:focus {
+  outline: none;
+  border-color: var(--red);
+}
+
+.consult-submit {
+  width: 100%;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.consult-status {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  min-height: 1.2em;
+}
+
+.consult-status.ok { color: #5fd08a; }
+.consult-status.err { color: #ff8087; }
+
+body.consult-open { overflow: hidden; }
+
 .tech-card-copy {
   max-width: 34ch;
   margin: 0;
