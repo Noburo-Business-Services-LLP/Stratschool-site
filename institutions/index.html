@@ -21,7 +21,7 @@
           <a href="/institutions/" aria-current="page">For Institutions</a>
           <a href="/edii-tn-ai/">For Governments</a>
           <a href="/resources/">Resources</a>
-          <a class="btn btn-primary" href="#" data-consult-open>Schedule Consultation</a>
+          <a class="btn btn-primary" href="#" data-consult-open data-metal="red">Schedule Consultation</a>
         </div>
         <button class="menu-toggle" data-menu-toggle aria-label="Open menu" aria-expanded="false"><span></span></button>
       </div>
@@ -46,8 +46,8 @@
             <h1 class="hero-title compact reveal" style="--delay: 80ms;">Embed startup infrastructure on campus.</h1>
             <p class="lede reveal" style="--delay: 160ms;">StratSchool works with institutions that want sharper innovation outcomes, stronger student execution, and entrepreneurship programs that feel practical instead of ceremonial.</p>
             <div class="actions reveal" style="--delay: 240ms;">
-              <a class="btn btn-primary" href="#" data-consult-open>Schedule Consultation</a>
-              <a class="btn btn-secondary" href="/edii-tn-ai/">View EDII-TN case</a>
+              <a class="btn btn-primary" href="#" data-consult-open data-metal="red">Schedule Consultation</a>
+              <a class="btn btn-secondary" href="/edii-tn-ai/" data-metal>View EDII-TN case</a>
             </div>
             <div class="pill-list reveal" style="--delay: 300ms;">
               <span class="pill">Built for founder and campus outcomes</span>
@@ -282,6 +282,7 @@
     </div>
   </div>
   <script src="/site.js"></script>
+  <script type="module" src="/assets/js/liquid-metal-buttons.js"></script>
   <script>
     // Consultation form: emails details to reach@stratschool.org via Web3Forms (with mailto fallback)
     (function(){
@@ -293,7 +294,7 @@
       function setStatus(msg, cls){ statusEl.textContent = msg; statusEl.className = 'consult-status' + (cls ? ' ' + cls : ''); }
       function open(e){ if(e) e.preventDefault(); modal.hidden = false; document.body.classList.add('consult-open'); setStatus('',''); var f = modal.querySelector('input'); if(f) setTimeout(function(){ f.focus(); }, 50); }
       function close(){ modal.hidden = true; document.body.classList.remove('consult-open'); }
-      document.querySelectorAll('[data-consult-open]').forEach(function(b){ b.addEventListener('click', open); });
+      document.addEventListener('click', function(e){ var t = e.target.closest && e.target.closest('[data-consult-open]'); if(t){ open(e); } });
       modal.querySelectorAll('[data-consult-close]').forEach(function(b){ b.addEventListener('click', close); });
       document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !modal.hidden) close(); });
       form.addEventListener('submit', function(e){
