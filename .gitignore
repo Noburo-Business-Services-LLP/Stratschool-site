@@ -1,2 +1,5 @@
 .vercel
 .DS_Store
+_vendor_tmp/
+_*.cjs
+_*.png
