@@ -1,0 +1,40 @@
+name: Publish (Notion → site)
+
+on:
+  workflow_dispatch:            # one-click "Run workflow" button
+  schedule:
+    - cron: "*/30 * * * *"      # also auto-checks Notion every 30 min
+
+concurrency:
+  group: publish
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate article pages from Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DB: ${{ secrets.NOTION_DB }}
+        run: node build/generate.mjs
+
+      - name: Deploy to S3 + invalidate CloudFront
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ap-south-1
+        run: |
+          aws s3 sync . s3://stratschool-site-609665073007/ \
+            --exclude ".git/*" --exclude ".github/*" --exclude "build/*" \
+            --exclude ".vercel/*" --exclude "_*" --exclude "*.json" --delete
+          aws cloudfront create-invalidation \
+            --distribution-id E3AIM43PLVYVSE --paths "/*"
