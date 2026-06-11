@@ -188,24 +188,23 @@ function init(canvas, heroEl) {
       logo.scale.setScalar(0.96 + o * 0.06);
     }
 
-    // Fade the whole scene out near the hero bottom so the next (white) section
-    // never guillotines a bright glow — the cosmos dissolves into black first.
-    const fade = 1 - smoothstep(0.6, 0.92, scrollProgress);
-    canvas.style.opacity = fade;
-    if (scrim) scrim.style.opacity = fade;
-
     composer.render();
   }
 
-  // Only render while the hero is on-screen.
+  // Render while the hero OR the stacking-cards section is on-screen, so the
+  // cosmos stays visible behind the transparent cards through the whole scroll.
   let running = false, rafId = null;
   function loop() { animate(); rafId = requestAnimationFrame(loop); }
   function start() { if (!running) { running = true; loop(); } }
   function stop() { running = false; if (rafId) cancelAnimationFrame(rafId); rafId = null; }
+  const watch = [heroEl, document.querySelector(".stack-section")].filter(Boolean);
   if ("IntersectionObserver" in window) {
-    new IntersectionObserver((entries) => {
-      entries.forEach((e) => { e.isIntersecting ? start() : stop(); });
-    }, { threshold: 0 }).observe(heroEl);
+    const visible = new Set();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { e.isIntersecting ? visible.add(e.target) : visible.delete(e.target); });
+      visible.size ? start() : stop();
+    }, { threshold: 0 });
+    watch.forEach((el) => io.observe(el));
   } else start();
 
   window.addEventListener("resize", () => {
