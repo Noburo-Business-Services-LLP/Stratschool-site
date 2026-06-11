@@ -1788,7 +1788,7 @@ body.consult-open { overflow: hidden; }
 }
 
 .case-metrics .stat-block {
-  min-height: 156px;
+  min-height: 168px;
   border-radius: 26px;
   box-shadow: none;
   justify-content: space-between;
@@ -1807,8 +1807,10 @@ body.consult-open { overflow: hidden; }
 
 .case-metric-wide {
   grid-column: 1 / -1;
-  min-height: 132px;
+  min-height: 150px;
   align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
 }
 
 .case-metric-wide .stat-number {
