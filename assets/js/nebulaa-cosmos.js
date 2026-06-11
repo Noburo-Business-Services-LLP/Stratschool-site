@@ -28,7 +28,7 @@ function init(canvas, heroEl) {
 
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.82, 0.5, 0.42);
+  const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.55, 0.45, 0.55);
   composer.addPass(bloom);
 
   // ---- Starfield (gold-tinted) ----
@@ -124,16 +124,16 @@ function init(canvas, heroEl) {
   sunCanvas.width = sunCanvas.height = 256;
   const sctx = sunCanvas.getContext("2d");
   const grad = sctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-  grad.addColorStop(0, "rgba(255,250,235,1)");
-  grad.addColorStop(0.15, "rgba(255,224,140,0.92)");
-  grad.addColorStop(0.42, "rgba(252,204,36,0.48)");
+  grad.addColorStop(0, "rgba(255,247,228,0.92)");
+  grad.addColorStop(0.18, "rgba(255,216,120,0.7)");
+  grad.addColorStop(0.45, "rgba(252,204,36,0.34)");
   grad.addColorStop(1, "rgba(252,204,36,0)");
   sctx.fillStyle = grad;
   sctx.fillRect(0, 0, 256, 256);
   const sunTex = new THREE.CanvasTexture(sunCanvas);
-  const sun = new THREE.Sprite(new THREE.SpriteMaterial({ map: sunTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
-  sun.scale.set(360, 360, 1);
-  sun.position.set(0, 78, -660);
+  const sun = new THREE.Sprite(new THREE.SpriteMaterial({ map: sunTex, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending, depthWrite: false }));
+  sun.scale.set(240, 240, 1);
+  sun.position.set(0, 52, -700);
   scene.add(sun);
 
   // ---- Nebulaa logo plane (fades/glows in on scroll, blended via bloom) ----

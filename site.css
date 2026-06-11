@@ -1884,6 +1884,71 @@ body.consult-open { overflow: hidden; }
     linear-gradient(180deg, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0) 26%, rgba(13,13,13,0) 70%, rgba(13,13,13,0.6) 100%);
 }
 
+/* Nebulaa stacking glass cards */
+.stack-section {
+  overflow: visible; /* allow position: sticky (default .section overflow:clip breaks it) */
+  background:
+    radial-gradient(80% 60% at 78% 18%, rgba(252,204,36,0.08), transparent 60%),
+    var(--black);
+}
+.stack-scroll {
+  margin-top: 42px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding-bottom: 16vh;
+}
+.stack-card {
+  position: sticky;
+  top: calc(var(--nav-height) + 56px + var(--i, 0) * 26px);
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 40px 44px;
+  min-height: 230px;
+  border-radius: 28px;
+  background: linear-gradient(150deg, rgba(255,255,255,0.1), rgba(255,255,255,0.025) 60%);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 34px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.16);
+  overflow: hidden;
+  will-change: transform;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.stack-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(120% 100% at 100% 0%, rgba(252,204,36,0.16), transparent 46%);
+}
+.stack-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(252,204,36,0.6);
+  flex: 0 0 auto;
+}
+.stack-body {
+  display: grid;
+  gap: 12px;
+}
+.stack-card .card-title {
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+}
+.stack-card .body-copy {
+  color: var(--muted-dark);
+  max-width: 60ch;
+}
+@media (max-width: 640px) {
+  .stack-card { flex-direction: column; gap: 14px; padding: 30px 26px; min-height: 200px; }
+  .stack-card { top: calc(var(--nav-height) + 24px + var(--i, 0) * 18px); }
+}
+
 .resource-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
