@@ -2582,3 +2582,22 @@ body.consult-open { overflow: hidden; }
     width: 100%;
   }
 }
+
+/* ===== Shared: photo carousel + scroll-tilt + institutional logo marquee ===== */
+.scroll-tilt { perspective: 1000px; margin-top: 20px; }
+.photo-carousel { position: relative; margin: 34px auto 0; max-width: 920px; border-radius: 28px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.18); transform-origin: center center; will-change: transform; }
+.pc-track { display: flex; transition: transform .6s cubic-bezier(.22,.61,.36,1); }
+.pc-slide { min-width: 100%; position: relative; margin: 0; }
+.pc-slide img { width: 100%; height: auto; display: block; }
+.pc-slide figcaption { position: absolute; left: 18px; bottom: 18px; max-width: 70%; background: rgba(0,0,0,.6); color: #fff; padding: 12px 18px; border-radius: 14px; font-size: 1rem; }
+.pc-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: none; background: rgba(0,0,0,.45); color: #fff; font-size: 1.5rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; transition: background .2s; }
+.pc-btn:hover { background: rgba(0,0,0,.8); }
+.pc-prev { left: 16px; } .pc-next { right: 16px; }
+.pc-dots { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 2; }
+.pc-dot { width: 9px; height: 9px; border-radius: 50%; border: none; background: rgba(255,255,255,.5); cursor: pointer; padding: 0; transition: all .25s; }
+.pc-dot.active { background: #fff; width: 24px; border-radius: 6px; }
+
+.inst-rail { gap: 0; margin-top: 30px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.inst-rail .logo-track { gap: 0; align-items: center; animation-duration: 36s; min-width: max-content; }
+.inst-rail .logo-pill { background: transparent; border: 0; box-shadow: none; padding: 0; margin-right: 72px; min-width: 0; height: 104px; border-radius: 0; }
+.inst-rail .logo-pill img { max-height: 92px; max-width: 260px; width: auto; object-fit: contain; filter: none; }

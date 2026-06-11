@@ -92,29 +92,33 @@
         <div class="container section-inner">
           <div class="eyebrow reveal">Institution roster</div>
           <h2 class="section-title wide reveal" style="--delay: 70ms;">Trusted by budding entrepreneurs from.</h2>
-          <div class="photo-mosaic">
-            <figure class="photo-card reveal">
-              <img src="/assets/photos/design-workshop.jpg" alt="Design thinking workshop by StratSchool" loading="lazy">
-              <figcaption>Programs shaped for colleges that want more than workshop optics.</figcaption>
-            </figure>
-            <div class="photo-stack">
-              <figure class="photo-card reveal" style="--delay: 70ms;">
-                <img src="/assets/photos/ignite-jetmech.jpeg" alt="Student founders from StratSchool" loading="lazy">
-                <figcaption>Students building real startup thinking, not just attending sessions.</figcaption>
-              </figure>
-              <figure class="photo-card reveal" style="--delay: 140ms;">
-                <img src="/assets/photos/ignite-rendezvous.jpeg" alt="Campus founders in program showcase" loading="lazy">
-                <figcaption>Campus-ready founder programs with visible outcomes.</figcaption>
-              </figure>
+          <div class="scroll-tilt">
+          <div class="photo-carousel" data-carousel>
+            <div class="pc-track" data-pc-track>
+              <figure class="pc-slide"><img src="/assets/photos/design-workshop.jpg" alt="Design thinking workshop by StratSchool" loading="lazy"><figcaption>Programs shaped for colleges that want more than workshop optics.</figcaption></figure>
+              <figure class="pc-slide"><img src="/assets/photos/ignite-jetmech.jpeg" alt="Student founders from StratSchool" loading="lazy"><figcaption>Students building real startup thinking, not just attending sessions.</figcaption></figure>
+              <figure class="pc-slide"><img src="/assets/photos/ignite-rendezvous.jpeg" alt="Campus founders in program showcase" loading="lazy"><figcaption>Campus-ready founder programs with visible outcomes.</figcaption></figure>
             </div>
+            <button class="pc-btn pc-prev" data-pc-prev aria-label="Previous photo">&#8249;</button>
+            <button class="pc-btn pc-next" data-pc-next aria-label="Next photo">&#8250;</button>
+            <div class="pc-dots" data-pc-dots></div>
           </div>
-          <div class="institution-logo-grid">
-            <span class="logo-pill logo-large reveal"><img src="/assets/logos/srm.png" alt="SRM University" loading="lazy"></span>
-            <span class="logo-pill logo-large reveal" style="--delay: 40ms;"><img src="/assets/logos/sairam.png" alt="Sairam Institutions" loading="lazy"></span>
-            <span class="logo-pill logo-large reveal" style="--delay: 80ms;"><img src="/assets/logos/mop.png" alt="M.O.P. Vaishnav College for Women" loading="lazy"></span>
-            <span class="logo-pill logo-large reveal" style="--delay: 120ms;"><img src="/assets/logos/hindustan.png" alt="Hindustan College of Arts and Science" loading="lazy"></span>
-            <span class="logo-pill logo-large reveal" style="--delay: 160ms;"><img src="/assets/logos/stjoseph.png" alt="St. Joseph's College of Engineering" loading="lazy"></span>
-            <span class="logo-pill logo-large reveal" style="--delay: 200ms;"><img src="/assets/logos/amcet.png" alt="AMCET Institutions" loading="lazy"></span>
+          </div>
+          <div class="logo-rail inst-rail">
+            <div class="logo-track">
+              <span class="logo-pill"><img src="/assets/logos/srm.png" alt="SRM University" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/sairam.png" alt="Sairam Institutions" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/mop.png" alt="M.O.P. Vaishnav College for Women" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/hindustan.png" alt="Hindustan College of Arts and Science" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/stjoseph.png" alt="St. Joseph's College of Engineering" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/amcet.png" alt="AMCET Institutions" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/srm.png" alt="" aria-hidden="true" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/sairam.png" alt="" aria-hidden="true" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/mop.png" alt="" aria-hidden="true" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/hindustan.png" alt="" aria-hidden="true" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/stjoseph.png" alt="" aria-hidden="true" loading="lazy"></span>
+              <span class="logo-pill"><img src="/assets/logos/amcet.png" alt="" aria-hidden="true" loading="lazy"></span>
+            </div>
           </div>
         </div>
       </section>
@@ -328,6 +332,54 @@
           else { setStatus('Something went wrong. Please email reach@stratschool.org.', 'err'); }
         }).catch(function(){ setStatus('Network error. Please email reach@stratschool.org.', 'err'); });
       });
+    })();
+  </script>
+  <script>
+    // Photo carousel + scroll-tilt
+    (function(){
+      var car = document.querySelector('[data-carousel]');
+      if(!car) return;
+      var track = car.querySelector('[data-pc-track]');
+      var slides = track.children, n = slides.length;
+      var dotsWrap = car.querySelector('[data-pc-dots]');
+      var i = 0, timer;
+      for (var d=0; d<n; d++){
+        var b = document.createElement('button');
+        b.className = 'pc-dot' + (d===0?' active':'');
+        b.setAttribute('aria-label','Go to slide '+(d+1));
+        (function(idx){ b.addEventListener('click', function(){ go(idx); restart(); }); })(d);
+        dotsWrap.appendChild(b);
+      }
+      var dots = dotsWrap.children;
+      function go(idx){ i = (idx+n)%n; track.style.transform = 'translateX(-'+(i*100)+'%)'; for(var k=0;k<n;k++){ dots[k].classList.toggle('active', k===i); } }
+      function next(){ go(i+1); } function prev(){ go(i-1); }
+      car.querySelector('[data-pc-next]').addEventListener('click', function(){ next(); restart(); });
+      car.querySelector('[data-pc-prev]').addEventListener('click', function(){ prev(); restart(); });
+      function start(){ timer = setInterval(next, 4500); }
+      function restart(){ clearInterval(timer); start(); }
+      car.addEventListener('mouseenter', function(){ clearInterval(timer); });
+      car.addEventListener('mouseleave', restart);
+      start();
+    })();
+    (function(){
+      var card = document.querySelector('[data-carousel]');
+      if(!card) return;
+      var isMobile = window.innerWidth <= 768;
+      function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
+      function update(){
+        var rect = card.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        var start = vh * 0.95, end = vh * 0.25;
+        var p = clamp((start - rect.top) / (start - end), 0, 1);
+        var rotate = 20 * (1 - p);
+        var scale = isMobile ? (0.7 + 0.2 * p) : (1.05 - 0.05 * p);
+        card.style.transform = 'rotateX(' + rotate.toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
+      }
+      var ticking = false;
+      function onScroll(){ if(!ticking){ requestAnimationFrame(function(){ update(); ticking = false; }); ticking = true; } }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', function(){ isMobile = window.innerWidth <= 768; update(); });
+      update();
     })();
   </script>
 </body>
