@@ -1848,6 +1848,42 @@ body.consult-open { overflow: hidden; }
   margin-top: 0;
 }
 
+/* Nebulaa cosmic hero background */
+.cosmos-hero {
+  background: transparent !important; /* let the fixed 3D canvas show through */
+}
+.cosmos-hero::before {
+  display: none; /* hide the dot texture so the 3D scene shows cleanly */
+}
+.cosmos-hero .panel {
+  background: linear-gradient(180deg, rgba(10,10,12,0.62), rgba(10,10,12,0.48));
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  border-color: rgba(255,255,255,0.12);
+}
+.cosmos-hero .panel .card,
+.cosmos-hero .panel .spotlight-card {
+  background: rgba(12,12,14,0.5);
+}
+.cosmos-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  display: block;
+  pointer-events: none;
+}
+.cosmos-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(58% 78% at 19% 48%, rgba(0,0,0,0.82), rgba(0,0,0,0.4) 52%, rgba(0,0,0,0) 72%),
+    linear-gradient(180deg, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0) 26%, rgba(13,13,13,0) 70%, rgba(13,13,13,0.6) 100%);
+}
+
 .resource-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
