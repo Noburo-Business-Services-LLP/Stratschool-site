@@ -182,8 +182,8 @@ function init(canvas, heroEl) {
 
     // Logo reveal: glows in early-to-mid scroll, fully blended before the next section covers it.
     if (logo) {
-      // fade in early, then ease back out before the next section so it never gets chopped
-      const o = smoothstep(0.05, 0.3, scrollProgress) * (1 - smoothstep(0.62, 0.82, scrollProgress));
+      // fade in early, then stay visible throughout the rest of the cosmic scroll
+      const o = smoothstep(0.04, 0.24, scrollProgress);
       logo.material.opacity = o * 0.95;
       logo.scale.setScalar(0.96 + o * 0.06);
     }
