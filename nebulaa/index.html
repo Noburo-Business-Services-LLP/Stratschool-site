@@ -19,6 +19,15 @@
   </script>
 </head>
 <body>
+  <div class="neb-intro" data-neb-intro aria-hidden="true">
+    <div class="neb-intro-stage">
+      <span class="neb-orb neb-orb-a"></span>
+      <span class="neb-orb neb-orb-b"></span>
+      <span class="neb-orb neb-orb-c"></span>
+      <span class="neb-intro-flash"></span>
+      <img class="neb-intro-logo" src="/assets/logos/nebulaa-new.png" alt="Nebulaa">
+    </div>
+  </div>
   <div class="site-shell">
     <nav class="site-nav" data-nav>
       <div class="container nav-inner">
@@ -160,6 +169,29 @@
       </section>
     </main>
   </div>
+  <script>
+    // Intro loader: three lights assemble into the Nebulaa logo, then reveal the UI.
+    (function(){
+      var intro = document.querySelector('[data-neb-intro]');
+      if(!intro) return;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(reduce){ if(intro.parentNode) intro.parentNode.removeChild(intro); return; }
+      document.body.classList.add('neb-locked');
+      var logo = intro.querySelector('.neb-intro-logo');
+      var finished = false;
+      function finish(){
+        if(finished) return; finished = true;
+        setTimeout(function(){            // hold the assembled logo briefly
+          intro.classList.add('done');
+          document.body.classList.remove('neb-locked');
+          setTimeout(function(){ if(intro.parentNode) intro.parentNode.removeChild(intro); }, 750);
+        }, 600);
+      }
+      // Reveal the UI once the logo has finished forming (robust to load timing).
+      if(logo){ logo.addEventListener('animationend', finish); }
+      setTimeout(finish, 4500); // safety fallback
+    })();
+  </script>
   <script src="/site.js"></script>
   <script type="module" src="/assets/js/liquid-metal-buttons.js"></script>
   <script type="module" src="/assets/js/nebulaa-cosmos.js"></script>

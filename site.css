@@ -1884,6 +1884,95 @@ body.consult-open { overflow: hidden; }
     linear-gradient(180deg, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0) 26%, rgba(13,13,13,0) 70%, rgba(13,13,13,0.6) 100%);
 }
 
+/* Nebulaa intro loader — three lights swirl in and assemble into the logo */
+body.neb-locked { overflow: hidden; }
+.neb-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(60% 60% at 50% 45%, rgba(60,38,4,0.55), transparent 70%),
+    #050403;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+.neb-intro.done { opacity: 0; visibility: hidden; pointer-events: none; }
+.neb-intro-stage {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+.neb-orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffaf0 0%, #ffe27a 32%, #fccc24 56%, rgba(252,204,36,0) 76%);
+  box-shadow: 0 0 26px 8px rgba(252,204,36,0.55);
+  opacity: 0;
+}
+.neb-orb-a { animation: nebOrbA 1.9s cubic-bezier(0.5,0,0.2,1) forwards; }
+.neb-orb-b { animation: nebOrbB 1.9s cubic-bezier(0.5,0,0.2,1) forwards; }
+.neb-orb-c { animation: nebOrbC 1.9s cubic-bezier(0.5,0,0.2,1) forwards; }
+@keyframes nebOrbA { /* clockwise */
+  0%   { transform: rotate(0deg)   translateX(140px) scale(0.6); opacity: 0; }
+  12%  { opacity: 1; }
+  78%  { transform: rotate(450deg) translateX(40px)  scale(1);   opacity: 1; }
+  100% { transform: rotate(540deg) translateX(0)     scale(0.4); opacity: 0; }
+}
+@keyframes nebOrbB { /* counter-clockwise */
+  0%   { transform: rotate(120deg)  translateX(140px) scale(0.6); opacity: 0; }
+  12%  { opacity: 1; }
+  78%  { transform: rotate(-330deg) translateX(40px)  scale(1);   opacity: 1; }
+  100% { transform: rotate(-420deg) translateX(0)     scale(0.4); opacity: 0; }
+}
+@keyframes nebOrbC { /* clockwise, offset */
+  0%   { transform: rotate(240deg) translateX(140px) scale(0.6); opacity: 0; }
+  12%  { opacity: 1; }
+  78%  { transform: rotate(690deg) translateX(40px)  scale(1);   opacity: 1; }
+  100% { transform: rotate(780deg) translateX(0)     scale(0.4); opacity: 0; }
+}
+.neb-intro-flash {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffaf0 0%, rgba(252,204,36,0.6) 40%, rgba(252,204,36,0) 72%);
+  opacity: 0;
+  animation: nebFlash 0.7s ease-out 1.65s forwards;
+}
+@keyframes nebFlash {
+  0%   { opacity: 0; transform: scale(0.2); }
+  40%  { opacity: 1; transform: scale(2.6); }
+  100% { opacity: 0; transform: scale(4.5); }
+}
+.neb-intro-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 240px;
+  height: auto;
+  transform: translate(-50%, -50%) scale(0.5);
+  opacity: 0;
+  filter: drop-shadow(0 0 26px rgba(252,204,36,0.55));
+  animation: nebLogoIn 1s cubic-bezier(0.34,1.56,0.64,1) 1.75s forwards;
+}
+@keyframes nebLogoIn {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.5)  rotate(-30deg); }
+  60%  { opacity: 1; transform: translate(-50%, -50%) scale(1.06) rotate(4deg); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1)    rotate(0deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .neb-intro { display: none; }
+}
+
 /* Nebulaa stacking glass cards */
 .stack-section {
   overflow: visible; /* allow position: sticky (default .section overflow:clip breaks it) */
