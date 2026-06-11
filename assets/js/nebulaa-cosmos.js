@@ -27,7 +27,7 @@ function init(canvas, heroEl) {
 
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.05, 0.6, 0.28);
+  const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.82, 0.5, 0.42);
   composer.addPass(bloom);
 
   // ---- Starfield (gold-tinted) ----
@@ -140,7 +140,7 @@ function init(canvas, heroEl) {
   new THREE.TextureLoader().load("/assets/logos/nebulaa-new.png", (tex) => {
     tex.colorSpace = THREE.SRGBColorSpace;
     const aspect = (tex.image && tex.image.width && tex.image.height) ? tex.image.width / tex.image.height : 1;
-    const h = 92, w = h * aspect;
+    const h = 64, w = h * aspect;
     const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending });
     logo = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat);
     logo.position.set(0, 14, 0);
@@ -156,8 +156,8 @@ function init(canvas, heroEl) {
     const rect = heroEl.getBoundingClientRect();
     const span = Math.max(rect.height * 0.85, 1);
     scrollProgress = clamp((-rect.top) / span, 0, 1);
-    // gentle forward drift as you scroll the hero
-    target = { x: 0, y: 18 + scrollProgress * 10, z: 100 - scrollProgress * 55 };
+    // very gentle drift only — avoid enlarging the logo as you scroll
+    target = { x: 0, y: 18 + scrollProgress * 4, z: 100 - scrollProgress * 10 };
   }
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
   function smoothstep(e0, e1, x) { const t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); }
@@ -181,9 +181,10 @@ function init(canvas, heroEl) {
 
     // Logo reveal: glows in early-to-mid scroll, fully blended before the next section covers it.
     if (logo) {
-      const o = smoothstep(0.04, 0.38, scrollProgress);
-      logo.material.opacity = o;
-      logo.scale.setScalar(0.9 + o * 0.16);
+      // fade in early, then ease back out before the next section so it never gets chopped
+      const o = smoothstep(0.05, 0.3, scrollProgress) * (1 - smoothstep(0.62, 0.82, scrollProgress));
+      logo.material.opacity = o * 0.95;
+      logo.scale.setScalar(0.96 + o * 0.06);
     }
 
     composer.render();
