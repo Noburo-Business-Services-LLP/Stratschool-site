@@ -1848,29 +1848,6 @@ body.consult-open { overflow: hidden; }
   margin-top: 0;
 }
 
-/* Particle text effect (Nebulaa) */
-.particle-section {
-  background: #000;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-.particle-canvas {
-  display: block;
-  width: 100%;
-  max-width: 900px;
-  height: auto;
-  margin: 18px auto 0;
-  aspect-ratio: 2 / 1;
-  border-radius: 20px;
-  cursor: crosshair;
-}
-.particle-hint {
-  margin-top: 16px;
-  color: rgba(255, 255, 255, 0.42);
-  font-size: 0.85rem;
-  letter-spacing: 0.01em;
-}
-
 .resource-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
