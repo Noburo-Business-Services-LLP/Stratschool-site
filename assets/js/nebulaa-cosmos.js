@@ -68,8 +68,13 @@ function init(canvas, heroEl) {
           mat2 rot = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
           pos.xy = rot * pos.xy;
           vec4 mv = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = size * (300.0 / -mv.z);
-          gl_Position = projectionMatrix * mv;
+          if (mv.z > -12.0) {            // at/behind the camera near plane -> cull (stops projection smear / "stick" streaks)
+            gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+            gl_PointSize = 0.0;
+          } else {
+            gl_PointSize = clamp(size * (300.0 / -mv.z), 0.0, 14.0);
+            gl_Position = projectionMatrix * mv;
+          }
         }`,
       fragmentShader: `
         varying vec3 vColor;
