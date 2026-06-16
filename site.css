@@ -1874,6 +1874,34 @@ body.consult-open { overflow: hidden; }
   display: block;
   pointer-events: none;
 }
+.cosmos-stars {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: repeat;
+  background-size: 520px 520px;
+  background-image:
+    radial-gradient(1.4px 1.4px at 8% 14%, rgba(255,255,255,0.9), transparent 60%),
+    radial-gradient(1.2px 1.2px at 22% 39%, rgba(255,231,170,0.8), transparent 60%),
+    radial-gradient(1px 1px at 35% 8%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(1.3px 1.3px at 48% 62%, rgba(255,255,255,0.85), transparent 60%),
+    radial-gradient(1px 1px at 61% 27%, rgba(255,231,170,0.7), transparent 60%),
+    radial-gradient(1.4px 1.4px at 73% 73%, rgba(255,255,255,0.9), transparent 60%),
+    radial-gradient(1px 1px at 86% 18%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(1.2px 1.2px at 92% 52%, rgba(255,231,170,0.8), transparent 60%),
+    radial-gradient(1px 1px at 14% 78%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(1.3px 1.3px at 30% 88%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(1px 1px at 54% 94%, rgba(255,231,170,0.7), transparent 60%),
+    radial-gradient(1.2px 1.2px at 68% 6%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(1px 1px at 80% 90%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(1.4px 1.4px at 96% 80%, rgba(255,255,255,0.85), transparent 60%),
+    radial-gradient(1px 1px at 4% 50%, rgba(255,231,170,0.7), transparent 60%),
+    radial-gradient(1.2px 1.2px at 44% 22%, rgba(255,255,255,0.8), transparent 60%);
+  animation: cosmosTwinkle 5.5s ease-in-out infinite alternate;
+}
+@keyframes cosmosTwinkle { 0% { opacity: 0.55; } 100% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .cosmos-stars { animation: none; } }
 .cosmos-scrim {
   position: fixed;
   inset: 0;
