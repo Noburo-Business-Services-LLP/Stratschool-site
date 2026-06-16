@@ -68,7 +68,7 @@ function init(canvas, heroEl) {
           mat2 rot = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
           pos.xy = rot * pos.xy;
           vec4 mv = modelViewMatrix * vec4(pos, 1.0);
-          if (mv.z > -12.0) {            // at/behind the camera near plane -> cull (stops projection smear / "stick" streaks)
+          if (mv.z > -30.0) {            // cull anything near/behind the camera -> stops projection smear / "stick" streaks
             gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
             gl_PointSize = 0.0;
           } else {
